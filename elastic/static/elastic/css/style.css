@@ -13,13 +13,7 @@
     #map{
         z-index: 1;
     }
-    #title{
-        background-color: rgb(133, 197, 225);
-        font-size: 40px;
-        text-align: center;
-        /*border-style: solid;*/
-        /*border-color: #e0e0fd;*/
-    }
+
     .map_wrap{
         font-size:20px;
         position: absolute;
@@ -142,7 +136,7 @@
 .ResultReport{
     position :absolute ;
     overflow: auto;
-    left: 55%;
+    left: 54%;
     font-size:30px;
     width: 700px;
     height: 100%;
@@ -157,36 +151,87 @@
     font-size:20px;
 }
 .reporttext{
-    font-size:18px;
-    text-decoration: underline;
+    font-size:20px;
 
-    margin-bottom: 1%;
+    margin-right: 15%;
+    margin-bottom: 3%;
 }
-#reportvisitort{
-    margin-left:3%;
-}
+
 .reporttitle{
+
+    text-align: center;
     font-size:28px;
     text-decoration: underline;
     text-decoration-style: solid;
     text-decoration-color: blue;
     text-decoration-thickness: 4px;
 
-    margin-bottom: 1%;
+    margin-bottom: 2%;
 
 }
 .chart-wrap{
+   text-align: center;
 
-    /*width: 300px;*/
-    text-align: center;
-
-    /*transform: translate(10%, 0%);*/
 }
 canvas{
-
+    text-align: center;
     width: 500px;
     height: 300px;
-
-    margin-bottom: 5%;
     background-color: #ffffff;
 }
+hr {
+  height: 3px;
+  background-color: blue;
+}
+.reportexplain{
+    font-size:18px;
+    margin-bottom: 7%;
+
+}
+.chart{
+    margin-left:15%;
+    width:500px;
+    text-align: center;
+}
+.piechart{
+    margin-left: 20%;
+}
+#reportend0, #reportend1{
+    margin-left: 15%;
+}
+
+.charts{
+    width: 500px;
+    height:300px;
+
+}
+
+#ReportTitleBar{
+    text-align: center;
+    display: flex;
+    background-color: rgb(184, 215, 228);
+    /*justify-content: space-between;*/
+    font-size:24px;
+    border: 10px solid #78b2c400;
+}
+
+#clock{
+    margin-top: 3%;
+    font-size: 10px;
+}
+#close{
+    margin-left:470px;
+    font-size:30px;
+}
+#logo{
+    width:180px;
+    height:80px;
+}
+ #title{
+        background-color: rgb(243, 239, 210);
+        font-size: 32px;
+        /*text-align: center;*/
+        /*border-style: solid;*/
+        /*border-color: #e0e0fd;*/
+
+    }
