@@ -1,5 +1,6 @@
 
-let flag = 0; //버튼 클릭 제어 하려고 눌러야 무조건 분석하기 눌리게
+let flag = 0; //버튼 클릭 제어 하려고 눌러야 무조건 분석하기 눌리게 flag 1일때만 버튼 눌리게 !
+let flag1 = 0 ;
     $(document).ready(function(){
     $("#searchInput").autocomplete({  //오토 컴플릿트 시작
          source: List,   // source는 gudata.js파일 내부의 List 배열
@@ -46,7 +47,7 @@ init();
 //분석하기 버튼 활성화 함수
 function btnActive()  {
   const target = document.getElementById('report');
-  if (flag==1) {
+  if (flag==1 && flag1==1) {
       target.disabled = false;
   }
 }
@@ -227,6 +228,7 @@ $.getJSON('http://127.0.0.1:8000/map/', function(data){
     panTo(lat,lng);
     DrawPolygon();
     DrawPolygon2();
+
 }
 document.getElementById("search_btn").addEventListener("click",show);
 
@@ -324,8 +326,8 @@ document.getElementById("search_btn").addEventListener("click",show);
                 fillOpacity: 0.7 // 채우기 불투명도 입니다
             });
             kakao.maps.event.addListener(polygon, 'mouseover', function(mouseEvent) { //마우스 올려놨을 때 색 변하게
-             polygon.setOptions({fillColor: '#e3606c'});
-            polygon.setOptions({strokeColor: '#ea2121'});
+             polygon.setOptions({fillColor: '#bb4bf5'});
+            polygon.setOptions({strokeColor: '#991aad'});
             });
              kakao.maps.event.addListener(polygon, 'mouseout', function() { // 다각형에 mouseout 이벤트를 등록하고 이벤트가 발생하면 폴리곤의 채움색을 원래색으로 변경합니다
                  polygon.setOptions({fillColor: '#A2FF99'});
@@ -335,6 +337,8 @@ document.getElementById("search_btn").addEventListener("click",show);
               kakao.maps.event.addListener(polygon, 'mousedown', function() {
                   showCommercialArea(sgname);
                   showCommercialAreaName(name);
+                  flag1=1;
+                  console.log(flag1);
 
               });
             polygon.setMap(map);
@@ -370,7 +374,8 @@ document.getElementById("search_btn").addEventListener("click",show);
              kakao.maps.event.addListener(polygon, 'mousedown', function() {
                   showCommercialArea(sgname);
                   showCommercialAreaName(name);
-
+                  flag1=1;
+                  console.log(flag1);
 
               });
             polygon.setMap(map);
