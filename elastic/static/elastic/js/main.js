@@ -403,7 +403,9 @@ fetch(thislink)
   .then(res => res.json())
   .then(res => {
 //막대 그래프
-
+Chart.defaults.set('plugins.datalabels', {
+  color: '#FE777B'
+});
 var chartArea = document.getElementById('점포수').getContext('2d');
 // 차트를 생성한다.
       if(window.myChart != undefined){
@@ -413,6 +415,7 @@ window.myChart = new Chart(chartArea, {
     // ①차트의 종류(String)
     type: 'line',
     // ②차트의 데이터(Object)
+     plugins:[ChartDataLabels],
     data: {
         // ③x축에 들어갈 이름들(Array)
         labels: res["점포수"].label,
@@ -427,23 +430,41 @@ window.myChart = new Chart(chartArea, {
             // ⑧dataset의 선 색(rgba값을 String으로 표현)
             borderColor: 'rgba(255, 99, 132, 1)',
             // ⑨dataset의 선 두께(Number)
-            borderWidth: 2
+            borderWidth: 2,
+
         }]
     },
     // ⑩차트의 설정(Object)
-    options: {
+    options:{
+    plugins:{
+      datalabels:{
+           color:'black',
+            font:{size:15},
+        formatter:function(value,context){
+          // data 에 넣은 데이타 순번. 물론 0 부터 시작
+          var idx = context.dataIndex;
+          // 여기선 첫번째 데이타엔 단위를 '원' 으로, 그 다음 데이타엔 'P' 를 사용
+          // addComma() 는 여기서 기술하지 않았지만, 천단위 세팅. ChartJS 의 data 엔 숫자만 입력
+          return context.chart.data[idx];
 
-        responsive: true,
-        // ⑪축에 관한 설정(Object)
-        scales: {
-            // ⑫y축에 대한 설정(Object)
-            y: {
-                // ⑬시작을 0부터 하게끔 설정(최소값이 0보다 크더라도)(boolean)
-                beginAtZero: true
-
-            }
         }
+      }
     }
+
+  }
+    // options: {
+    //
+    //     responsive: true,
+    //     // ⑪축에 관한 설정(Object)
+    //     scales: {
+    //         // ⑫y축에 대한 설정(Object)
+    //         y: {
+    //             // ⑬시작을 0부터 하게끔 설정(최소값이 0보다 크더라도)(boolean)
+    //             beginAtZero: true
+    //
+    //         }
+    //     }
+    // }
 });
 //프랜차이즈와 일반점포 비율 파이차트
 var chartArea1 = document.getElementById('프랜차이즈').getContext('2d');
