@@ -47,9 +47,10 @@ init();
 //분석하기 버튼 활성화 함수
 function btnActive()  {
   const target = document.getElementById('report');
-  if (flag==1 && flag1==1) {
+  if (flag===1&& flag1===1) {
       target.disabled = false;
   }
+
 }
 var Target = document.getElementById("clock");
         function clock() {
