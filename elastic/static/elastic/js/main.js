@@ -449,22 +449,18 @@ window.myChart = new Chart(chartArea, {
 
         }
       }
-    }
+    },
+        responsive: true,
+        // ⑪축에 관한 설정(Object)
+        scales: {
+            // ⑫y축에 대한 설정(Object)
+            y: {
+                // ⑬시작을 0부터 하게끔 설정(최소값이 0보다 크더라도)(boolean)
+                beginAtZero: true
 
-  }
-    // options: {
-    //
-    //     responsive: true,
-    //     // ⑪축에 관한 설정(Object)
-    //     scales: {
-    //         // ⑫y축에 대한 설정(Object)
-    //         y: {
-    //             // ⑬시작을 0부터 하게끔 설정(최소값이 0보다 크더라도)(boolean)
-    //             beginAtZero: true
-    //
-    //         }
-    //     }
-    // }
+            }
+        }
+    }
 });
 //프랜차이즈와 일반점포 비율 파이차트
 var chartArea1 = document.getElementById('프랜차이즈').getContext('2d');
@@ -474,6 +470,7 @@ if(window.myChart1 != undefined){
 window.myChart1 = new Chart(chartArea1, {
     // ①차트의 종류(String)
     type: 'pie',
+    plugins:[ChartDataLabels],
     // ②차트의 데이터(Object)
     data: {
         // ③x축에 들어갈 이름들(Array)
@@ -496,6 +493,23 @@ window.myChart1 = new Chart(chartArea1, {
     // ⑩차트의 설정(Object)
     options: {
         responsive: false,
+        plugins:{
+      datalabels:{
+           color:'black',
+            font:{size:15},
+        formatter:function(value,context){
+          // data 에 넣은 데이타 순번. 물론 0 부터 시작
+            var txt = Math.round(value*100)/100;
+
+          var idx = context.dataIndex;
+          // 여기선 첫번째 데이타엔 단위를 '원' 으로, 그 다음 데이타엔 'P' 를 사용
+          // addComma() 는 여기서 기술하지 않았지만, 천단위 세팅. ChartJS 의 data 엔 숫자만 입력
+          return context.chart.data[idx];
+
+        }
+      }
+    }
+        // responsive: false,
 
     }
 });
@@ -507,6 +521,7 @@ if(window.myChart2 != undefined){
 window.myChart2 = new Chart(chartArea2, {
     // ①차트의 종류(String)
     type: 'bar',
+    plugins:[ChartDataLabels],
     // ②차트의 데이터(Object)
     data: {
         // ③x축에 들어갈 이름들(Array)
@@ -529,6 +544,21 @@ window.myChart2 = new Chart(chartArea2, {
     // ⑩차트의 설정(Object)
     options: {
         responsive: true,
+        plugins: {
+            datalabels: {
+                color: 'black',
+                font: {size: 15},
+                formatter: function (value, context) {
+                    // data 에 넣은 데이타 순번. 물론 0 부터 시작
+                    var idx = context.dataIndex;
+                    // 여기선 첫번째 데이타엔 단위를 '원' 으로, 그 다음 데이타엔 'P' 를 사용
+                    // addComma() 는 여기서 기술하지 않았지만, 천단위 세팅. ChartJS 의 data 엔 숫자만 입력
+                    return context.chart.data[idx];
+
+                }
+            }
+        },
+
         // ⑪축에 관한 설정(Object)
         scales: {
             // ⑫y축에 대한 설정(Object)
@@ -548,6 +578,7 @@ if(window.myChart3 != undefined){
 window.myChart3 = new Chart(chartArea3, {
     // ①차트의 종류(String)
     type: 'bar',
+     plugins:[ChartDataLabels],
     // ②차트의 데이터(Object)
     data: {
         // ③x축에 들어갈 이름들(Array)
@@ -570,6 +601,20 @@ window.myChart3 = new Chart(chartArea3, {
     // ⑩차트의 설정(Object)
     options: {
         responsive: true,
+        plugins:{
+      datalabels:{
+           color:'black',
+            font:{size:15},
+        formatter:function(value,context){
+          // data 에 넣은 데이타 순번. 물론 0 부터 시작
+          var idx = context.dataIndex;
+          // 여기선 첫번째 데이타엔 단위를 '원' 으로, 그 다음 데이타엔 'P' 를 사용
+          // addComma() 는 여기서 기술하지 않았지만, 천단위 세팅. ChartJS 의 data 엔 숫자만 입력
+          return context.chart.data[idx];
+
+        }
+      }
+    },
         // ⑪축에 관한 설정(Object)
         scales: {
             // ⑫y축에 대한 설정(Object)
@@ -590,6 +635,7 @@ if(window.myChart4 != undefined){
 window.myChart4 = new Chart(chartArea4, {
     // ①차트의 종류(String)
     type: 'bar',
+    plugins:[ChartDataLabels],
 
     // ②차트의 데이터(Object)
     data: {
@@ -613,8 +659,22 @@ window.myChart4 = new Chart(chartArea4, {
     // ⑩차트의 설정(Object)
     options: {
         responsive: true,
+         plugins:{
+      datalabels:{
+           color:'black',
+            font:{size:10},
+        // formatter:function(value,context){
+        //   // data 에 넣은 데이타 순번. 물론 0 부터 시작
+        //   var idx = context.dataIndex;
+        //   return context.chart.data[idx];
+          // 여기선 첫번째 데이타엔 단위를 '원' 으로, 그 다음 데이타엔 'P' 를 사용
+          // addComma() 는 여기서 기술하지 않았지만, 천단위 세팅. ChartJS 의 data 엔 숫자만 입력
+           formatter:function(value, context) {
+               return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원"; },
+        }
+      }
+      },
 
-        },
         // ⑪축에 관한 설정(Object)
         scales: {
             // ⑫y축에 대한 설정(Object)
@@ -636,6 +696,7 @@ var chartArea5 = document.getElementById('시간대별매출').getContext('2d');
 window.myChart5 = new Chart(chartArea5, {
     // ①차트의 종류(String)
     type: 'line',
+    plugins:[ChartDataLabels],
     // ②차트의 데이터(Object)
     data: {
         // ③x축에 들어갈 이름들(Array)
@@ -658,7 +719,14 @@ window.myChart5 = new Chart(chartArea5, {
     // ⑩차트의 설정(Object)
     options: {
         responsive: true,
-
+         plugins:{
+      datalabels:{
+           color:'black',
+            font:{size:10},
+         formatter:function(value, context) {
+               return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원"; },
+      }
+    },
         },
         // ⑪축에 관한 설정(Object)
         scales: {
@@ -679,6 +747,7 @@ if(window.myChart6 != undefined){
 window.myChart6 = new Chart(chartArea6, {
     // ①차트의 종류(String)
     type: 'pie',
+    plugins:[ChartDataLabels],
     // ②차트의 데이터(Object)
     data: {
         // ③x축에 들어갈 이름들(Array)
@@ -702,7 +771,14 @@ window.myChart6 = new Chart(chartArea6, {
     options: {
         responsive: false,
         // ⑪축에 관한 설정(Object)
-
+         plugins:{
+      datalabels:{
+           color:'black',
+            font:{size:15},
+         formatter:function(value, context) {
+               return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원"; },
+      }
+    }
     }
 });
 // 연령대별 매출 - 막대 차트
@@ -714,6 +790,7 @@ if(window.myChart7 != undefined){
 window.myChart7 = new Chart(chartArea7, {
     // ①차트의 종류(String)
     type: 'bar',
+    plugins:[ChartDataLabels],
 
     // ②차트의 데이터(Object)
     data: {
@@ -737,7 +814,14 @@ window.myChart7 = new Chart(chartArea7, {
     // ⑩차트의 설정(Object)
     options: {
         responsive: true,
-
+         plugins:{
+      datalabels:{
+           color:'black',
+            font:{size:10},
+        formatter:function(value, context) {
+               return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원"; },
+      }
+    },
         },
         // ⑪축에 관한 설정(Object)
         scales: {
@@ -760,6 +844,7 @@ if(window.myChart8 != undefined){
 window.myChart8 = new Chart(chartArea8, {
     // ①차트의 종류(String)
     type: 'pie',
+    plugins:[ChartDataLabels],
     // ②차트의 데이터(Object)
     data: {
         // ③x축에 들어갈 이름들(Array)
@@ -783,7 +868,20 @@ window.myChart8 = new Chart(chartArea8, {
     options: {
         responsive: false,
         // ⑪축에 관한 설정(Object)
+         plugins:{
+      datalabels:{
+           color:'black',
+            font:{size:15},
+        formatter:function(value,context){
+          // data 에 넣은 데이타 순번. 물론 0 부터 시작
+          var idx = context.dataIndex;
+          // 여기선 첫번째 데이타엔 단위를 '원' 으로, 그 다음 데이타엔 'P' 를 사용
+          // addComma() 는 여기서 기술하지 않았지만, 천단위 세팅. ChartJS 의 data 엔 숫자만 입력
+          return context.chart.data[idx];
 
+        }
+      }
+    }
     }
 });
 
@@ -796,6 +894,7 @@ if(window.myChart9 != undefined){
 window.myChart9 = new Chart(chartArea9, {
     // ①차트의 종류(String)
     type: 'bar',
+    plugins:[ChartDataLabels],
 
     // ②차트의 데이터(Object)
     data: {
@@ -819,7 +918,20 @@ window.myChart9 = new Chart(chartArea9, {
     // ⑩차트의 설정(Object)
     options: {
         responsive: true,
+         plugins:{
+      datalabels:{
+           color:'black',
+            font:{size:15},
+        formatter:function(value,context){
+          // data 에 넣은 데이타 순번. 물론 0 부터 시작
+          var idx = context.dataIndex;
+          // 여기선 첫번째 데이타엔 단위를 '원' 으로, 그 다음 데이타엔 'P' 를 사용
+          // addComma() 는 여기서 기술하지 않았지만, 천단위 세팅. ChartJS 의 data 엔 숫자만 입력
+          return context.chart.data[idx];
 
+        }
+      }
+    },
         },
         // ⑪축에 관한 설정(Object)
         scales: {
@@ -843,7 +955,7 @@ if(window.myChart10 != undefined){
 window.myChart10 = new Chart(chartArea10, {
     // ①차트의 종류(String)
     type: 'bar',
-
+    plugins:[ChartDataLabels],
     // ②차트의 데이터(Object)
     data: {
         // ③x축에 들어갈 이름들(Array)
@@ -866,7 +978,20 @@ window.myChart10 = new Chart(chartArea10, {
     // ⑩차트의 설정(Object)
     options: {
         responsive: true,
+         plugins:{
+      datalabels:{
+           color:'black',
+            font:{size:15},
+        formatter:function(value,context){
+          // data 에 넣은 데이타 순번. 물론 0 부터 시작
+          var idx = context.dataIndex;
+          // 여기선 첫번째 데이타엔 단위를 '원' 으로, 그 다음 데이타엔 'P' 를 사용
+          // addComma() 는 여기서 기술하지 않았지만, 천단위 세팅. ChartJS 의 data 엔 숫자만 입력
+          return context.chart.data[idx];
 
+        }
+      }
+    },
         },
         // ⑪축에 관한 설정(Object)
         scales: {
@@ -890,6 +1015,7 @@ if(window.myChart11 != undefined){
 window.myChart11 = new Chart(chartArea11, {
     // ①차트의 종류(String)
     type: 'line',
+    plugins:[ChartDataLabels],
     // ②차트의 데이터(Object)
     data: {
         // ③x축에 들어갈 이름들(Array)
@@ -912,7 +1038,14 @@ window.myChart11 = new Chart(chartArea11, {
     // ⑩차트의 설정(Object)
     options: {
         responsive: true,
-
+         plugins:{
+      datalabels:{
+           color:'black',
+            font:{size:10},
+         formatter:function(value, context) {
+               return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원"; },
+      }
+    },
         },
         // ⑪축에 관한 설정(Object)
         scales: {
@@ -936,7 +1069,7 @@ if(window.myChart12 != undefined){
 window.myChart12 = new Chart(chartArea12, {
     // ①차트의 종류(String)
     type: 'bar',
-
+    plugins:[ChartDataLabels],
     // ②차트의 데이터(Object)
     data: {
         // ③x축에 들어갈 이름들(Array)
@@ -959,7 +1092,20 @@ window.myChart12 = new Chart(chartArea12, {
     // ⑩차트의 설정(Object)
     options: {
         responsive: true,
+         plugins:{
+      datalabels:{
+           color:'black',
+            font:{size:15},
+        formatter:function(value,context){
+          // data 에 넣은 데이타 순번. 물론 0 부터 시작
+          var idx = context.dataIndex;
+          // 여기선 첫번째 데이타엔 단위를 '원' 으로, 그 다음 데이타엔 'P' 를 사용
+          // addComma() 는 여기서 기술하지 않았지만, 천단위 세팅. ChartJS 의 data 엔 숫자만 입력
+          return context.chart.data[idx];
 
+        }
+      }
+    },
         },
         // ⑪축에 관한 설정(Object)
         scales: {
@@ -985,7 +1131,7 @@ if(window.myChart13 != undefined){
 window.myChart13 = new Chart(chartArea13, {
     // ①차트의 종류(String)
     type: 'bar',
-
+    plugins:[ChartDataLabels],
     // ②차트의 데이터(Object)
     data: {
         // ③x축에 들어갈 이름들(Array)
@@ -1008,7 +1154,20 @@ window.myChart13 = new Chart(chartArea13, {
     // ⑩차트의 설정(Object)
     options: {
         responsive: true,
+         plugins:{
+      datalabels:{
+           color:'black',
+            font:{size:15},
+        formatter:function(value,context){
+          // data 에 넣은 데이타 순번. 물론 0 부터 시작
+          var idx = context.dataIndex;
+          // 여기선 첫번째 데이타엔 단위를 '원' 으로, 그 다음 데이타엔 'P' 를 사용
+          // addComma() 는 여기서 기술하지 않았지만, 천단위 세팅. ChartJS 의 data 엔 숫자만 입력
+          return context.chart.data[idx];
 
+        }
+      }
+    },
         },
         // ⑪축에 관한 설정(Object)
         scales: {
