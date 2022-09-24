@@ -208,7 +208,9 @@ hr {
     height:300px;
 
 }
-
+#reportTitle{
+    font-size:30px;
+}
 #ReportTitleBar{
     /*text-align: center;*/
     display: flex;
